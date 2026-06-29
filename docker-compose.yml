@@ -1,6 +1,6 @@
 services:
   wazmeow-server:
-    image: ghcr.io/guilhermejansen/wazmeow:latest
+    image: ghcr.io/conversalabs/wazmeow:latest
     ports:
       - "8080:8080"
     environment:

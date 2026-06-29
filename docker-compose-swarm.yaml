@@ -4,7 +4,7 @@
 
 services:
   wazmeow_private:
-    image: ghcr.io/guilhermejansen/wazmeow:latest
+    image: ghcr.io/conversalabs/wazmeow:latest
     networks:
       - network_public
     environment:
