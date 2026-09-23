@@ -1,5 +1,25 @@
 # 📋 Changelog - wazmeow
 
+## [v2.1.0] - 2026-09-23
+
+### ✨ Novidades desta Versão
+
+Para detalhes completos, veja a [release v2.1.0](https://github.com/conversalabs/use-wazmeow/releases/tag/v2.1.0).
+
+### 📦 Pacotes Disponíveis
+
+- Linux AMD64: `linux-amd64-v2.1.0.tar.gz`
+- Linux ARM64: `linux-arm64-v2.1.0.tar.gz`
+- macOS Intel: `darwin-amd64-v2.1.0.tar.gz`
+- macOS Apple Silicon: `darwin-arm64-v2.1.0.tar.gz`
+- Windows: `windows-amd64-v2.1.0.zip`
+
+### 🔐 Verificação
+
+Valide a integridade com: `sha256sum -c checksums.txt`
+
+---
+
 ## [v1.22.2] - 2026-09-14
 
 ### ✨ Novidades desta Versão
