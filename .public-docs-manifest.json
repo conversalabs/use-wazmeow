@@ -1,0 +1,30 @@
+{
+  "brand": "wazmeow",
+  "files": {
+    "README.md": "abba3bf8afe139318f6456778fdb524cc9d57129e386c3e819e7815eeec1b7f0",
+    "api/connector-llm.txt": "d6f0e9cf61acd27add3e910da11306b6119203fb556ae109844a12222dde08e2",
+    "api/llm.txt": "c2e8a565be1752ad215c8b03ce45b3a3cbf5a5ee515ee64cc279722d11694ebc",
+    "api/network-route-llm.txt": "41689225680d150f99b0017d1fe147e7a91fce5a7ae24293d19d480ab04c3f66",
+    "api/spec.yml": "f7bec7503d19b23294f83db1536e1a59e67d599f10f82cb645ea6c2d47a4539d",
+    "api/swagger.json": "2984c09d967d908f47efc9a69aa31502f32a5d3ef299e9f88e6871220d21fcbc",
+    "api/swagger.yaml": "4585bbe77fd309649c678ea85d9c120ec22bbe6e630e7c362ac60602f5e5f912",
+    "docs/CONFIGURATION.md": "dee548239aae29dd97910145fe4fc88297c76572a32ab6f02d77b2186923af18",
+    "docs/INDEX.md": "5bf46b46faa46bb362fff8a878e6f98445432101cda9babb90139f963e5f2724",
+    "docs/INSTALL.md": "5ce536dff616f1ae8f35c1ce5aa279d8d81b4353b12b9a02b0ca0f7b66642b27",
+    "docs/call-audio-implementation-guide.md": "2361166385a0e11580bdabf8fd8b87147f8153082d45a7a6b7e7a66262c53eae",
+    "docs/call-video-guide.md": "d20738d23c309e03cb45dfa27a3533ee98bec8069a707b377468f4f8dbe660c2",
+    "docs/connector.md": "2610e06a2d949cf9b38e73e776318ee017cd5d95dd82a144fe53fe9283131cd8",
+    "docs/network-route.md": "179d3ab9640e071fd25a409e540b9ad7e9afeffe7285bf70ac16b5d4709fe1cb",
+    "docs/passkey-integration.md": "0590664e7a8ee2bc2e5999dfe8dee806b1e062307e547458d9909d1cdcb32ee3",
+    "docs/session-import.md": "edaf0b0e353b27a0b22429d153f03ead9b3904a5435b7026f184ff8744e00b4e",
+    "docs/webhook-events.md": "12866ac3a3e54c7d9fcdb96cac9e1a45dc3ff9ef2847dd49c70712e2ed5a0395",
+    "docs/whatsapp-web-call-integration.md": "054ac5d65c5aeae124e53377c4805ecd4796b9f73ca5032e0c9a3b9384682ed2",
+    "install.bat": "774e6e0e9d1ce6b834f8b282ffb7df926adad7aa268e16f5b0c6111cd269e601",
+    "install.sh": "58beb760f6684ca5ff7861b872e3e4343da507f56207d65799b7b2b3e0835a41",
+    "llms.txt": "24a8b9183056fdeae5b5223e4e1b0b47860de4beb065b17525e5a79a89631338"
+  },
+  "public_repository": "conversalabs/use-wazmeow",
+  "schema": 1,
+  "source_commit": "bee6584ea77ce745d3654c9fa6d0e2e4b6fb27da",
+  "version": "2.4.2"
+}
