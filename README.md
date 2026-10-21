@@ -1,5 +1,25 @@
 # wazmeow — WhatsApp API Gateway
 
+Repositório público de distribuição (binários + instalador) do **wazmeow**.
+
+## Instalação
+
+**Linux/macOS** (instalador automático):
+```bash
+curl -fsSL https://raw.githubusercontent.com/guilhermejansen/use-wazmeow/main/install.sh | bash
+```
+
+Ou baixe o binário da última versão em **[Releases](https://github.com/guilhermejansen/use-wazmeow/releases/latest)**.
+
+## Licença
+
+O wazmeow valida a licença contra o hub central de licenciamento.
+Configure a variável `LICENSE_KEY` com a sua chave.
+
+---
+
+## Documentação e operação atualizadas — v2.4.2
+
 **wazmeow**, da Conversa Labs, é um gateway REST auto-hospedado para conectar números WhatsApp, trocar mensagens e distribuir eventos para suas integrações. Inclui dashboard web, sessões independentes por usuário e engine nativo de chamadas.
 
 Este é o repositório público de apoio: documentação, contratos de API, Postman, configurações e acesso aos pacotes de distribuição. O código do servidor tem licença comercial. A integração usa o protocolo de aparelhos vinculados; **não é a API oficial da Meta/WhatsApp**. Mudanças no serviço, restrições de conta e regras do WhatsApp podem afetar os recursos. Use contas e destinatários autorizados.

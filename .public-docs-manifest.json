@@ -1,7 +1,7 @@
 {
   "brand": "wazmeow",
   "files": {
-    "README.md": "abba3bf8afe139318f6456778fdb524cc9d57129e386c3e819e7815eeec1b7f0",
+    "README.md": "78abbed697a9d5b66c34993bcb95b9915f21c38dda781ad1dbf61c765d7e73c9",
     "api/connector-llm.txt": "d6f0e9cf61acd27add3e910da11306b6119203fb556ae109844a12222dde08e2",
     "api/llm.txt": "c2e8a565be1752ad215c8b03ce45b3a3cbf5a5ee515ee64cc279722d11694ebc",
     "api/network-route-llm.txt": "41689225680d150f99b0017d1fe147e7a91fce5a7ae24293d19d480ab04c3f66",
@@ -25,6 +25,6 @@
   },
   "public_repository": "conversalabs/use-wazmeow",
   "schema": 1,
-  "source_commit": "bee6584ea77ce745d3654c9fa6d0e2e4b6fb27da",
+  "source_commit": "3423f8665b2a99b1a5c5745b8040f4341fd6e26c",
   "version": "2.4.2"
 }
