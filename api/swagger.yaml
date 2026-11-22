@@ -4687,7 +4687,7 @@ info:
     url: https://github.com/conversalabs/use-wazmeow/blob/main/LICENSE
   termsOfService: https://github.com/conversalabs/use-wazmeow/blob/main/LICENSE
   title: wazmeow WhatsApp API Gateway
-  version: 2.5.0 # x-release-please-version
+  version: 2.5.1 # x-release-please-version
 paths:
   /admin/archive:
     delete:

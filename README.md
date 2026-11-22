@@ -18,7 +18,7 @@ Configure a variável `LICENSE_KEY` com a sua chave.
 
 ---
 
-## Documentação e operação atualizadas — v2.5.0
+## Documentação e operação atualizadas — v2.5.1
 
 **wazmeow**, da Conversa Labs, é um gateway REST auto-hospedado para conectar números WhatsApp, trocar mensagens e distribuir eventos para suas integrações. Inclui dashboard web, sessões independentes por usuário e engine nativo de chamadas.
 
@@ -70,7 +70,7 @@ Pré-requisitos: Docker com Compose v2 e uma licença válida. O exemplo cria um
 ### 1. Configure `.env`
 
 ```dotenv
-DOCKER_TAG=v2.5.0
+DOCKER_TAG=v2.5.1
 LICENSE_KEY=SUBSTITUA_PELA_SUA_LICENCA
 WAZMEOW_ADMIN_TOKEN=SUBSTITUA_POR_UM_TOKEN_ALEATORIO
 POSTGRES_PASSWORD=SUBSTITUA_POR_UMA_SENHA_ALEATORIA_HEXADECIMAL
@@ -127,7 +127,7 @@ curl --fail-with-body http://localhost:8080/health
 
 Abra o dashboard em `http://localhost:8080/dashboard/` e a referência da instância em `http://localhost:8080/api/`. Se o startup falhar, consulte `docker compose logs gateway`; licença, conexão com banco e migrações precisam estar válidas antes do pareamento.
 
-O exemplo fixa a versão `v2.5.0`. Leia as notas da versão antes de atualizar; `latest` pode mudar. Os arquivos completos [`.env.sample`](.env.sample), [Compose](docker-compose.yml) e [Swarm](docker-compose-swarm.yaml) são referências que precisam de configuração para seu ambiente.
+O exemplo fixa a versão `v2.5.1`. Leia as notas da versão antes de atualizar; `latest` pode mudar. Os arquivos completos [`.env.sample`](.env.sample), [Compose](docker-compose.yml) e [Swarm](docker-compose-swarm.yaml) são referências que precisam de configuração para seu ambiente.
 
 ## Primeira sessão pela API
 

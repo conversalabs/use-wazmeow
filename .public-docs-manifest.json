@@ -1,20 +1,20 @@
 {
   "brand": "wazmeow",
   "files": {
-    "README.md": "777940e8a9c15951b9a9bfe538ebc187746f0075da36762de56e04abbac94544",
+    "README.md": "c079af18d9ea3db82e94c5db6b9cb58b5bd220d0b26487d01e8c45917e5f94be",
     "api/connector-llm.txt": "d6f0e9cf61acd27add3e910da11306b6119203fb556ae109844a12222dde08e2",
     "api/events-llm.txt": "148446812849b589650b23b0e6fcabea33d9edaeb69b5006a27873b57b4445bb",
     "api/llm.txt": "ff328c39508a2078e329be3153fccc38f62a6c6181bf8cae8dc27ad2d96ea33a",
     "api/network-route-llm.txt": "41689225680d150f99b0017d1fe147e7a91fce5a7ae24293d19d480ab04c3f66",
-    "api/spec.yml": "12da681fc62752dace303ccc16bdd5e9af574344562fe8ae6f6ce34cd07711ad",
-    "api/swagger.json": "b66079d0753448ce9716b3d64ace7fbb9af0c42f5acc5ceda466198b9c06c08c",
-    "api/swagger.yaml": "d731e25a32685699bbb79b8f794488a54dc12b619cdddff75394dfb1419591fe",
-    "docs/CONFIGURATION.md": "36bc3e2b0a42c7ece26edf50cc238362d397c271f4908841d42a98229fd38fe7",
+    "api/spec.yml": "baf93b45dc562068c3806e624dfb709b1274dff010ae18c316a2a104feb6c329",
+    "api/swagger.json": "e0aa45b78df29339cf700d358c0dfcdad5bde4360a9f867e7034566e023d638f",
+    "api/swagger.yaml": "f23d0ceb17314fe17866c6f9d9efe0e91695afe0177adc7d9a5360ccf54efe74",
+    "docs/CONFIGURATION.md": "025f54de7659c2b46c62a163829638dd6a4c0051f56f88092e9d37e6c169a1c5",
     "docs/INDEX.md": "1d1c49d6b2176fedf69e2bd7837cf6f6706aee20709879e4439cffdaf286cc6d",
-    "docs/INSTALL.md": "57e12d8253a1fe58af68d5b97ded178f3bd45fc7373b77305958f5e16341f6de",
+    "docs/INSTALL.md": "451bdd82d4fd899b27c545bb8eba99b42eff439725eabc6dd98e64f20118226b",
     "docs/call-audio-implementation-guide.md": "c31c1e8cfa1d48935ba706384eedcc1d25d6e6d414ece1d9156aca64c14625fb",
     "docs/call-video-guide.md": "544d579217f2d38d947a16282e0e1c4413ab41b155bcd6b35cd4ab4e7f69ff8a",
-    "docs/calls-media-install.md": "01a8a3899e0946febd611d588949cd6f7cdf6020438f20d125d168a826d13ed8",
+    "docs/calls-media-install.md": "645c9477ec30f942d188512e5279d3b2449ee8eb13a7bc6430bad21bf1ffe0ec",
     "docs/calls-overview.md": "0b3eb70a7ff16b9d2025d7b6d96e989df95a5dd7f21fb7e08d016cbfde4626cd",
     "docs/communities.md": "1354b8f3e3ff5f003c262348ddd1c45f3d837c68cd3dfcc517088e3aaaaf625b",
     "docs/connector.md": "2610e06a2d949cf9b38e73e776318ee017cd5d95dd82a144fe53fe9283131cd8",
@@ -29,6 +29,6 @@
   },
   "public_repository": "conversalabs/use-wazmeow",
   "schema": 1,
-  "source_commit": "6507efef51b72b02194be290455c30bd7adf7d43",
-  "version": "2.5.0"
+  "source_commit": "68ef8c6673b6cb0721c6cbbe15c3c1569d36fcff",
+  "version": "2.5.1"
 }

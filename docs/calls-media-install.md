@@ -24,7 +24,7 @@ São quatro partes, e cada uma depende da anterior:
 
 | O que é | Onde |
 |---|---|
-| API | imagem `ghcr.io/conversalabs/wazmeow:v2.5.0`, que também traz a ferramenta de provisão (`/app/callsprovision`) |
+| API | imagem `ghcr.io/conversalabs/wazmeow:v2.5.1`, que também traz a ferramenta de provisão (`/app/callsprovision`) |
 | Serviço de mídia | imagem `ghcr.io/conversalabs/wazmeow-callworker:v2.5.0`, para `amd64` e `arm64` |
 | Aplicativo do atendente, macOS 14 ou mais novo | `calls-desktop-2.5.0-macos-universal.dmg` (Apple Silicon e Intel) |
 | Aplicativo do atendente, Windows 10/11 64 bits | `calls-desktop-2.5.0-windows-x64-setup.exe` |
@@ -40,7 +40,7 @@ junto com os pacotes da API e o `checksums.txt` de todos eles.
 - **Licença comercial válida.** Nesta distribuição, a licença comercial validada na subida
   autoriza Chamadas; não há direito separado de Chamadas. Veja
   [calls-overview.md](calls-overview.md#licença-de-chamadas).
-- **A API na versão 2.5.0, atrás de HTTPS público**, rodando em Docker. O endereço HTTPS que
+- **A API na versão 2.5.1, atrás de HTTPS público**, rodando em Docker. O endereço HTTPS que
   os atendentes usam para chegar à API é o **issuer** deste guia, por exemplo
   `https://api.seudominio.com`. O TLS termina no seu proxy ou balanceador.
 - **Um banco de autoridade separado**, PostgreSQL ou MySQL, distinto do banco da aplicação.
@@ -88,7 +88,7 @@ Gere os arquivos:
 
 ```bash
 docker run --rm -v /srv/wazmeow-calls:/private/calls \
-  ghcr.io/conversalabs/wazmeow:v2.5.0 \
+  ghcr.io/conversalabs/wazmeow:v2.5.1 \
   /app/callsprovision -init-files /private/calls \
     -control-host calls-control.seudominio.com \
     -issuer https://api.seudominio.com \
@@ -191,7 +191,7 @@ API:
 
 ```bash
 docker run --rm --network REDE_DA_API -v /srv/wazmeow-calls:/private/calls \
-  ghcr.io/conversalabs/wazmeow:v2.5.0 \
+  ghcr.io/conversalabs/wazmeow:v2.5.1 \
   /app/callsprovision -config /private/calls/calls-api.json \
     -calls-driver pgx -calls-dsn-file /private/calls/calls-dsn \
     -bind-user ID_DA_SESSAO -bind-profile production
@@ -211,7 +211,7 @@ arquivo e publique a porta de controle **presa ao IP da rede privada** do host d
 ```yaml
 services:
   gateway:
-    image: ghcr.io/conversalabs/wazmeow:v2.5.0
+    image: ghcr.io/conversalabs/wazmeow:v2.5.1
     environment:
       GLOBAL_CALLS_API_CONFIG_FILE: /private/calls/calls-api.json
       # ...as demais variáveis da sua instalação
@@ -333,7 +333,7 @@ na saída do comando:
 
 ```bash
 docker run --rm --network REDE_DA_API -v /srv/wazmeow-calls:/private/calls \
-  ghcr.io/conversalabs/wazmeow:v2.5.0 \
+  ghcr.io/conversalabs/wazmeow:v2.5.1 \
   /app/callsprovision -config /private/calls/calls-api.json \
     -calls-driver pgx -calls-dsn-file /private/calls/calls-dsn \
     -bind-user ID_DA_SESSAO -enroll-worker worker-1 -worker-max-calls 2 \
@@ -406,7 +406,7 @@ Na API:
 
 ```bash
 docker run --rm --network REDE_DA_API -v /srv/wazmeow-calls:/private/calls \
-  ghcr.io/conversalabs/wazmeow:v2.5.0 \
+  ghcr.io/conversalabs/wazmeow:v2.5.1 \
   /app/callsprovision -config /private/calls/calls-api.json \
     -calls-driver pgx -calls-dsn-file /private/calls/calls-dsn \
     -bind-user ID_DA_SESSAO -allow-worker worker-1

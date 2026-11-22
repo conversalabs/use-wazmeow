@@ -605,5 +605,5 @@ Se encontrar problemas:
 
 ---
 
-**Versão do Guia**: 2.5.0 <!-- x-release-please-version -->
+**Versão do Guia**: 2.5.1 <!-- x-release-please-version -->
 **Última Atualização**: 2026-11-21
