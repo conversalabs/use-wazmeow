@@ -5,6 +5,13 @@ for application clients. Use the [canonical Calls API guide](../api/llm.txt) and
 [OpenAPI](../api/spec.yml) for exact bodies, response schemas and media framing in
 your installed release. The former sidecar design is only historical (§4).
 
+> **Licence.** In this distribution the commercial licence validated at startup authorizes
+> calls. There is no separate calls entitlement, and the call routes never answer with a
+> licence error. An invalid or expired licence never reaches the routes: the gateway refuses
+> to start, or exits, with the error in the log. See
+> [calls-overview.md](./calls-overview.md) for the two ways of running calls and what each
+> one needs installed.
+
 ## 1. Current architecture and configuration
 
 The native engine is attached to each enabled WhatsApp client when it connects.
@@ -84,6 +91,23 @@ curl --fail-with-body -X POST "$BASE_URL/call/hangup" \
 The additive signaling routes remain: `/call/reject/send`, `/call/reject`,
 `/call/accept`, `/call/preaccept` and `/call/terminate`. They send signaling
 commands; they are not substitutes for the native audio stream.
+
+When the native calls engine is on and tracks the call, `/call/reject`,
+`/call/reject/send` and `/call/terminate` end it through the engine: a reject
+while an inbound call still rings, a hangup otherwise. The stanza goes to the
+exact device that called, and the engine drops the call too. Without the engine,
+or for a call it does not track, the legacy stanza is sent as before, to the
+device in `call_from` when it carries one (the `From` of the call offer webhook),
+or to the bare user, which WhatsApp delivers only to the primary device. The
+response body is the same on both paths. A follow-up `message` goes to the
+caller's account (`call_from` without its device), so every device of the caller
+gets it; `message_sent` reports whether it actually went out (`false` when the
+send failed). The reject also applies to
+`/call/terminate`: a callee that has not answered can only decline, and a
+terminate from it never reaches the caller. `/call/accept` and `/call/preaccept`
+always send the raw stanza: with the engine on, answer its calls with
+`POST /call/answer`, because the legacy accept does not connect the call and does
+not tell the engine.
 
 `/call/initiate` returns `501` by default. Use `/call/dial` for native outbound
 media. `GLOBAL_CALL_INITIATE_DIAL_ALIAS=true` explicitly makes initiate an alias

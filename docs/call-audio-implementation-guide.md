@@ -5,6 +5,13 @@ full client examples and availability limits, use the [canonical Calls API guide
 and [OpenAPI](../api/spec.yml) for the installed release. This is an operational guide;
 the earlier cross-project gap audit and implementation proposal are not current API requirements.
 
+> **Licence.** In this distribution the commercial licence validated at startup authorizes
+> calls. There is no separate calls entitlement, and the call routes never answer with a
+> licence error. An invalid or expired licence never reaches the routes: the gateway refuses
+> to start, or exits, with the error in the log. See
+> [calls-overview.md](./calls-overview.md) for the two ways of running calls and what each
+> one needs installed.
+
 ## 1. Architecture
 
 ```text
@@ -14,8 +21,9 @@ Application <-- WSS /call/{call_id}/stream --> PCM audio bridge
 
 The engine runs in the gateway process. The application controls calls over REST and
 exchanges raw audio over the WebSocket. No external call-media sidecar is required.
-The WebSocket does not negotiate WebRTC/SDP/ICE for your application, and the gateway
-does not provide a bundled SIP/PABX service or the new remote-media/desktop platform.
+The WebSocket does not negotiate WebRTC/SDP/ICE for your application, and there is no
+bundled SIP/PABX service. The other calls mode, with a separate media service and the
+attendant app, is a different deployment: see [calls-media-install.md](calls-media-install.md).
 
 | Surface | Contract |
 |---|---|

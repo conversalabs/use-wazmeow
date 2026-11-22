@@ -18,7 +18,7 @@ Configure a variável `LICENSE_KEY` com a sua chave.
 
 ---
 
-## Documentação e operação atualizadas — v2.4.2
+## Documentação e operação atualizadas — v2.5.0
 
 **wazmeow**, da Conversa Labs, é um gateway REST auto-hospedado para conectar números WhatsApp, trocar mensagens e distribuir eventos para suas integrações. Inclui dashboard web, sessões independentes por usuário e engine nativo de chamadas.
 
@@ -32,14 +32,16 @@ Este é o repositório público de apoio: documentação, contratos de API, Post
 |---|---|
 | Sessões e dispositivos | Múltiplas sessões, QR, código por telefone, status, reconexão e preferências por usuário. Passkey depende da conta e do autenticador do titular. |
 | Mensagens | Texto, resposta/citação, imagens, áudio, vídeo, documentos, stickers, contatos, localização, links, reações, listas e enquetes. |
-| Interativos e negócios | Botões, carrosséis, flows, catálogo, produtos, coleções, pedidos e cobranças, conforme contrato e licença da distribuição. |
-| Conversas e organização | Presença, leitura, arquivamento, fixação, silenciamento, etiquetas e favoritos; disponibilidade depende da sincronização da conta. |
-| Grupos, comunidades e canais | Participantes, permissões, convites, comunidades, newsletters e status. Cada operação respeita as permissões da conta. |
+| Respostas rápidas | Criar, listar e remover as respostas rápidas nativas de texto da conta (`/quick-reply`). |
+| Eventos com link | Criar, listar e remover eventos (`/event/create`, `/event/list`, `/event/{eventID}`), com imagem de capa e lembretes, e enviar o convite de um evento existente (`/chat/send/event-invite`). |
+| Interativos e negócios | Botões, carrosséis, flows, catálogo, produtos, coleções próprias (inclusive em análise, recusadas e vazias), pedidos, cobranças e histórico de cobranças (`/business/order/charges`), conforme contrato e licença da distribuição. |
+| Conversas e organização | Presença, leitura, marcar conversa como lida ou não lida (`/chat/read`), arquivamento, fixação, silenciamento, etiquetas e favoritos; disponibilidade depende da sincronização da conta. |
+| Grupos, comunidades e canais | Participantes, permissões, convites, comunidades, newsletters, consulta de canal por convite (`/newsletter/info-invite`) e status. Entrega do histórico recente a novos membros (`/group/history/*`), pelas últimas N mensagens retidas do grupo (até 200) ou por lista de IDs, com as mensagens fixadas incluídas automaticamente e marcadas como fixadas no aparelho de quem recebe, e também no mesmo pedido que adiciona os participantes. A gestão de participantes devolve a resposta do WhatsApp para cada um, inclusive o código e a validade do convite oferecido quando a privacidade da pessoa recusa a adição, e esse convite pode ser enviado no chat individual com ela (`/chat/send/group-invite`), como o "Enviar convite" do aplicativo. Administrador sempre pode enviar; membro comum quando o grupo permite. Permissões de grupo da tela do aplicativo: quem adiciona participantes (`/group/memberaddmode`), quem compartilha o convite (`/group/memberlinkmode`), quem compartilha o histórico (`/group/historysharemode`) e aprovação de novos membros (`/group/joinapproval`); o valor atual de cada uma vem em `/group/info`. Liberar o convite para todos exige adicionar participantes em todos (o WhatsApp recusa a outra combinação; a rota responde 409 nomeando a causa), e ao restringir o compartilhamento o WhatsApp gera um link de convite novo, invalidando o anterior (liberar de novo não gira o link); o gateway não gira nem revoga por conta própria. O aplicativo restringe o convite no mesmo gesto em que restringe "adicionar participantes" a admins num grupo comum: `/group/memberaddmode` muda só o ajuste dele por padrão e reproduz esse gesto com o campo opcional `sync_invite_share`. Bloquear encaminhadas muitas vezes (`/group/frequentlyforwarded`; o WhatsApp ainda não oferece o ajuste e recusa a gravação, e a rota responde `setting_not_available`), envio para análise dos admins (`/group/adminreports`), cancelar o próprio pedido de entrada (`/group/join/cancel`) e aceitar o convite que um admin envia como mensagem (`/group/join` e `/group/inviteinfo` com `Inviter`). Privacidade avançada da conversa (`/group/limitsharing`), envio e lista de mensagens para análise dos admins (`/group/adminreports/report` e `/group/adminreports/list`) e denúncia do grupo ao WhatsApp (`/group/report`) e formulário de entrada (`/group/membershipform*`: perguntas, pedidos com respostas e entrada respondendo; sem a revisão por formulário liberada na conta, os pedidos vêm sem as respostas, como no aplicativo); `/group/info` traz o estado atual desses ajustes. Convite por SMS ou e-mail a quem não tem WhatsApp não é oferecido. Nas comunidades: as duas permissões da tela do aplicativo (`/community/group-add-mode`, `/community/member-add-mode`, leitura em `/community/settings`), sugestões de grupo com aprovação, recusa e cancelamento (`/community/group-suggestions/*`), criação de grupo já dentro da comunidade (`/community/group/create`), lista completa dos grupos inclusive os não ingressados (`/community/all-groups`), transferência de propriedade e desativação (`/community/transfer-ownership`, `/community/deactivate`); veja o [guia de comunidades](docs/communities.md). Administração de canal: editar nome, descrição, foto e reações permitidas (`/newsletter/edit`), seguidores com o papel de cada um (`/newsletter/followers`), admins e convites pendentes (`/newsletter/admins`), aceitar e revogar convite de admin (`/newsletter/admin-invite/accept`, `/newsletter/admin-invite/revoke`), rebaixar admin (`/newsletter/demote-admin`), transferir a propriedade (`/newsletter/transfer-ownership`) e convidar para seguir (`/newsletter/follower-invite`). A lista de seguidores identifica apenas quem os aplicativos oficiais mostrariam — quem administra o canal e quem está nos contatos da sessão; os demais vêm sem nada que os identifique, com o papel e a data em que passaram a seguir — e não tem paginação: a consulta oficial leva só uma quantidade, no máximo 5000. Transferir a propriedade e rebaixar admin conferem as pré-condições do aplicativo antes de enviar (só o dono transfere, nunca para si mesmo, só para quem já é admin; o dono não deixa de ser admin do próprio canal), recusando com 409 e motivo próprio sem chamar o servidor; transferir deixa quem transferiu como admin. Fixar e desfixar publicações (`/newsletter/pin`, `/newsletter/unpin`) — publicação com mais de 30 dias não é fixável e, com quatro fixadas, uma nova substitui a mais antiga, então a resposta traz o conjunto fixado inteiro com a validade de cada uma. Ler as próprias reações e votos (`/newsletter/my-reactions`) e as capacidades de admin do canal (`/newsletter/capabilities`). Ler quem reagiu a uma publicação (`/newsletter/reaction-senders`) e quem votou em cada opção da enquete (`/newsletter/poll-voters`), com quantos o WhatsApp listou — não a contagem total de reações ou votos; essas leituras nomeiam apenas quem está nos contatos da sessão, o mesmo critério dos aplicativos. Votar numa enquete, trocar e retirar o voto (`/newsletter/poll-vote`, opções pelo nome, conferidas contra a enquete antes de enviar); `/newsletter/messages` e `/newsletter/message-updates` trazem em `poll` as opções, os votos de cada uma e o total. Rotular publicação como conteúdo de IA ou parceria paga (`/newsletter/label-ai-content`, `/newsletter/label-paid-partnership`; o rótulo é irremovível) e ler as restrições do canal (`/newsletter/enforcements`). Encontrar canais públicos: o diretório por lista com filtro de país e de categoria e paginação por cursor (`/newsletter/directory`), a prévia por categoria (`/newsletter/directory/categories`), a busca por nome (`/newsletter/search`), os recomendados à conta (`/newsletter/recommended`, que escondem como o aplicativo os canais já seguidos e os suspensos) e os parecidos com um canal (`/newsletter/similar`), com os limites que o aplicativo pede e a marcação de quais canais a conta já segue. Denúncias que a conta fez, com andamento e recurso (`/newsletter/reports`), denunciar um canal sem amostras de publicações (`/newsletter/report`), perfil de admin do canal (`/newsletter/admin-profile`, `/newsletter/admin-profile/setting`) e estatísticas só agregadas (`/newsletter/insights`). Perguntas e respostas no canal: o dono ou um admin pergunta (`/newsletter/question/send`, texto, imagem ou vídeo), lê as respostas com filtros, busca e cursor (`/newsletter/question/responses`), responde publicamente a uma resposta (`/newsletter/question/reply`), curte (`/newsletter/question/response/like`), destaca, oculta e reexibe (`/newsletter/question/response/state`) e bloqueia quem respondeu de responder às perguntas daquele canal (`/newsletter/question/response/block`); o seguidor responde (`/newsletter/question/respond`, de 1 a 256 caracteres contados como o aplicativo conta), lê e apaga as próprias respostas (`/newsletter/question/my-responses`, `/newsletter/question/my-responses/delete`). Quem respondeu aparece como nos aplicativos ("Followers can't see who responded, but admins can."): para o dono e os admins, o nome da agenda de quem é contato ou o apelido de quem não é, e a foto, nunca o número nem o identificador interno; seguidores não veem quem respondeu. Cada escrita é enviada uma vez só, com 504 quando o resultado fica incerto e 503 quando a sessão não estava conectada e nada foi enviado. Não disponíveis na API: denunciar uma resposta ao WhatsApp (sistema geral de denúncia, que a API não implementa), desbloquear quem respondeu (os aplicativos não têm o comando), pergunta em áudio ou vídeo redondo, perguntas em status de canal, editar uma pergunta (os aplicativos não deixam) e encaminhamento próprio de pergunta (é o encaminhamento comum de `/chat/send`). Cada operação respeita as permissões da conta. |
 | Eventos | Webhooks individuais/globais, RabbitMQ, Amazon SQS, Redis Streams e WebSocket; filtros, retries, buffer persistente, DLQ e replay administrativo. |
 | Mídia e armazenamento | Upload/download, thumbnails e S3 compatível, com configuração global/por usuário e retenção configurável. |
 | Pareamento em aplicativos | Connector incorporável com token efêmero, QR/código e encaminhamento do passo de passkey ao titular. |
 | Rede | Proxy por sessão e rota móvel nativa via Tailscale/tsnet, com versionamento e controle de prontidão. |
-| Chamadas nativas | Controle de chamadas no gateway, áudio PCM por WebSocket, reprodução e gravação em S3. Vídeo H.264 e recursos de grupo/link têm condições próprias. |
+| Chamadas nativas | Controle de chamadas no gateway, áudio PCM por WebSocket, reprodução e gravação no S3 da própria sessão (sem ele, o início da gravação responde `400`). Vídeo H.264 e recursos de grupo/link têm condições próprias. |
 | Operação | Dashboard, `/health`, monitoramento SSE, métricas, Sentry e tracing OpenTelemetry/Jaeger, conforme configuração. |
 
 Não há promessa de capacidade ilimitada: dimensione sessões, mídia, filas e conexões conforme seus recursos e sua carga real.
@@ -51,11 +53,13 @@ Não há promessa de capacidade ilimitada: dimensione sessões, mídia, filas e 
 | Produto | wazmeow |
 | Repositório público | [conversalabs/use-wazmeow](https://github.com/conversalabs/use-wazmeow) |
 | Imagem | `ghcr.io/conversalabs/wazmeow` |
+| Imagem do serviço de mídia de chamadas | `ghcr.io/conversalabs/wazmeow-callworker` (`amd64` e `arm64`) |
+| Aplicativo do atendente e SDK de chamadas | Os mesmos arquivos neutros da Conversa Labs para todas as distribuições, na [release](https://github.com/conversalabs/use-wazmeow/releases) |
 | Registro | GitHub Container Registry (GHCR) |
 | Prefixo das variáveis do servidor | `WAZMEOW_` |
 | Licença | Comercial, informada em `LICENSE_KEY` |
 
-Botões, carrosséis, flows, shop e envios de pedidos/cobranças não têm bloqueio Enterprise nesta distribuição. A licença comercial continua obrigatória e validada no startup; autenticação, validação de payload e disponibilidade da sessão continuam aplicáveis.
+Chamadas, botões, carrosséis, flows, shop e envios de pedidos/cobranças não têm bloqueio Enterprise nesta distribuição. A licença comercial continua obrigatória e validada no startup; autenticação, validação de payload e disponibilidade da sessão continuam aplicáveis.
 
 `LICENSE_KEY` não usa o prefixo do produto. `DATABASE_URL`, `GLOBAL_*`, `CONNECTOR_*` e `NETWORK_ROUTE_*` também mantêm esses nomes. O token administrativo é `WAZMEOW_ADMIN_TOKEN`; ele é diferente da licença e do token de cada sessão.
 
@@ -66,7 +70,7 @@ Pré-requisitos: Docker com Compose v2 e uma licença válida. O exemplo cria um
 ### 1. Configure `.env`
 
 ```dotenv
-DOCKER_TAG=v2.4.2
+DOCKER_TAG=v2.5.0
 LICENSE_KEY=SUBSTITUA_PELA_SUA_LICENCA
 WAZMEOW_ADMIN_TOKEN=SUBSTITUA_POR_UM_TOKEN_ALEATORIO
 POSTGRES_PASSWORD=SUBSTITUA_POR_UMA_SENHA_ALEATORIA_HEXADECIMAL
@@ -123,7 +127,7 @@ curl --fail-with-body http://localhost:8080/health
 
 Abra o dashboard em `http://localhost:8080/dashboard/` e a referência da instância em `http://localhost:8080/api/`. Se o startup falhar, consulte `docker compose logs gateway`; licença, conexão com banco e migrações precisam estar válidas antes do pareamento.
 
-O exemplo fixa a versão `v2.4.2`. Leia as notas da versão antes de atualizar; `latest` pode mudar. Os arquivos completos [`.env.sample`](.env.sample), [Compose](docker-compose.yml) e [Swarm](docker-compose-swarm.yaml) são referências que precisam de configuração para seu ambiente.
+O exemplo fixa a versão `v2.5.0`. Leia as notas da versão antes de atualizar; `latest` pode mudar. Os arquivos completos [`.env.sample`](.env.sample), [Compose](docker-compose.yml) e [Swarm](docker-compose-swarm.yaml) são referências que precisam de configuração para seu ambiente.
 
 ## Primeira sessão pela API
 
@@ -204,6 +208,8 @@ Os arquivos `api/*` deste repositório correspondem aos servidos em `/api/*` pel
 | [Passkey](docs/passkey-integration.md) | Passo do titular no navegador e confirmação |
 | [Importação de sessão](docs/session-import.md) | Alternativa BETA com snapshot sensível |
 | [Rota móvel](docs/network-route.md) | Egresso por sessão, persistência e operação |
+| [Chamadas: modos, licença e implantação](docs/calls-overview.md) | Comece aqui: os dois modos de uso, a licença e o que instalar |
+| [Chamadas com serviço de mídia: instalação](docs/calls-media-install.md) | Do zero à primeira ligação: provisão, serviço de mídia, aplicativo do atendente e SDK |
 | [Áudio de chamadas](docs/call-audio-implementation-guide.md) | Controle, stream e gravação |
 | [Vídeo de chamadas](docs/call-video-guide.md) | H.264, codecs, grupos e limitações |
 | [Integração de chamadas no navegador](docs/whatsapp-web-call-integration.md) | Fluxos de integração com o gateway |
@@ -229,7 +235,7 @@ Passkey exige o autenticador do titular e a cerimônia WebAuthn em `https://web.
 - Gravação exige `callRecord:true` e **S3 do usuário**. Gravação e stream PCM são mutuamente exclusivos na mesma chamada. O áudio fica em memória/S3; controle e partes ficam no banco. Pausas acima de 2 s podem não entrar no arquivo.
 - Rotas móveis com `failClosed:true` e `tcpOnly:true` bloqueiam o engine nativo. A política permissiva não ativa esse guard, mas o SOCKS continua sendo TCP: não interprete `failClosed:false` como suporte a mídia UDP pela rota móvel nem como garantia de chamadas.
 
-Servidor de mídia remoto, aplicativo desktop de telefonia, ponte SIP e seus novos instaladores não fazem parte desta distribuição pública. Consulte as notas de release para saber quais recursos estão disponíveis no pacote instalado.
+Os componentes do **modo com serviço de mídia** fazem parte da distribuição a partir da 2.5.0: a imagem do **serviço de mídia** (`ghcr.io/conversalabs/wazmeow-callworker`, `amd64` e `arm64`), a **ferramenta de provisão**, que vem na imagem da API, e, na [release](https://github.com/conversalabs/use-wazmeow/releases), o **aplicativo do atendente** para macOS 14+ e Windows e o **SDK de chamadas** (`@conversalabs/calls-sdk`). O aplicativo e o SDK são os mesmos arquivos neutros da Conversa Labs para todas as distribuições. Esse modo é **Beta** nesta versão, no macOS e no Windows; o aplicativo para Windows ainda não foi testado numa máquina Windows e ainda não tem certificado de assinatura de código, então o Windows mostra o aviso do SmartScreen na instalação. Ponte SIP não existe em nenhum modo. O passo a passo, da instalação à primeira ligação, está no [guia de instalação com serviço de mídia](docs/calls-media-install.md).
 
 ## Eventos, armazenamento e backups
 
@@ -245,11 +251,11 @@ Antes de atualizar, faça backup e ensaie restauração. Leia migrações e nota
 
 ## Binários, instaladores e integridade
 
-Baixe o pacote correspondente ao seu sistema e arquitetura em [Releases](https://github.com/conversalabs/use-wazmeow/releases). Mantenha o binário e os assets `static/` do mesmo pacote para que dashboard, SDK e `/api/` permaneçam compatíveis.
+Baixe o pacote correspondente ao seu sistema e arquitetura em [Releases](https://github.com/conversalabs/use-wazmeow/releases). Mantenha o binário e os assets `static/` do mesmo pacote para que o dashboard, o SDK JavaScript que ele carrega (`ZZ.sdk`) e `/api/` permaneçam compatíveis. Esse SDK do dashboard não é o SDK de chamadas do modo com serviço de mídia.
 
 As releases disponibilizam arquivos por plataforma e `checksums.txt`. Confira o SHA-256 do arquivo baixado contra a entrada correspondente, por exemplo com `sha256sum <arquivo>` no Linux, `shasum -a 256 <arquivo>` no macOS ou `Get-FileHash <arquivo> -Algorithm SHA256` no PowerShell.
 
-Os auxiliares [install.sh](install.sh) (Linux/macOS) e [install.bat](install.bat) (Windows) pertencem ao gateway existente. Leia suas opções e as notas da release antes de executar; instalação, permissões de serviço e compatibilidade precisam ser verificadas no seu ambiente. Esses scripts não instalam um novo desktop, worker de mídia remota ou ponte SIP.
+Os auxiliares [install.sh](install.sh) (Linux/macOS) e [install.bat](install.bat) (Windows) pertencem ao gateway existente. Leia suas opções e as notas da release antes de executar; instalação, permissões de serviço e compatibilidade precisam ser verificadas no seu ambiente. Esses scripts instalam somente o gateway. O **serviço de mídia** de chamadas e o **aplicativo do atendente** têm instalação própria, descrita no [guia de instalação com serviço de mídia](docs/calls-media-install.md); ponte SIP não existe.
 
 ## Suporte
 

@@ -4,6 +4,13 @@ Companion to [`call-audio-implementation-guide.md`](./call-audio-implementation-
 The audio plane is production-validated; **video is BETA** until proven against a real
 WhatsApp video call (the engine's media path still carries `NOT VALIDATED` markers).
 
+> **Licence.** In this distribution the commercial licence validated at startup authorizes
+> calls. There is no separate calls entitlement, and the call routes never answer with a
+> licence error. An invalid or expired licence never reaches the routes: the gateway refuses
+> to start, or exits, with the error in the log. See
+> [calls-overview.md](./calls-overview.md) for the two ways of running calls and what each
+> one needs installed.
+
 The engine (`meowcaller` fork under `whatsmeow-private/calls`) carries **encoded H.264
 Annex-B** over the WhatsApp relay. It does **not** encode or decode pixels — an external
 codec (the browser's WebCodecs, ffmpeg, a hardware encoder) produces and consumes the
